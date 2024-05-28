@@ -15,6 +15,3 @@ class RegistrationPage:
 		self.driver.find_element("id", "ConfirmPassword").send_keys("John123")
 		# driver.find_element("name", "register-button").click()
 
-
-
-
