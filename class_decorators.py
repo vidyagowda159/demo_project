@@ -38,8 +38,28 @@ class Sample:
 		pass
 
 s = Sample()
-print(dir(s))
+# print(dir(s))
 
+
+class A:
+
+	def spam(self):
+		pass
+
+
+class B:
+
+	def __init__(self, a):
+		self.a = a
+		self.a_obj = A()    # aggregation
+
+	def display(self):
+		pass
+
+# a = A()
+# s = Sample()
+# b = B(a)        # composition
+# b = B(s)
 
 
 

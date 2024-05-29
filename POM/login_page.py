@@ -34,19 +34,41 @@
 # 		self.driver.find_element(*self.locators["login_btn"]).click()
 
 #################################################################################
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from generic.locators import attach_locators
 from generic.excel_lib import read_locators
+from generic.wrapper import SeleniumWrapper
 
 loc = read_locators("login_objects")
 
-@attach_locators(loc)
-class LoginPage:
-	def __init__(self, driver):
-		self.driver = driver
 
-	def login(self):
-		self.driver.find_element(*self.login_link).click()
-		self.driver.find_element(*self.email_txt).send_keys("John.Doe@gmail.com")
-		self.driver.find_element(*self.pwd_txt).send_keys("John123")
-		self.driver.find_element(*self.remember_checkbox).click()
+@attach_locators(loc)
+class LoginPage(SeleniumWrapper):
+
+	def login(self, username, pwd):
+		# self.driver.find_element(*self.login_link).click()
+		self.click_element(self.login_link)
+
+		# self.driver.find_element(*self.email_txt).send_keys("John.Doe@gmail.com")
+		self.enter_text(self.email_txt, value=username)
+
+		# self.driver.find_element(*self.pwd_txt).send_keys("John123")
+		self.enter_text(self.pwd_txt, value=pwd)
+
+		# self.driver.find_element(*self.remember_checkbox).click()
+		self.click_element(self.remember_checkbox)
+
 		# self.driver.find_element(*self.login_btn).click()
+		self.click_element(self.login_btn)
+
+	def is_user_logged_in(self):
+		logout_element = "link text", "Log out"
+		wait_ = WebDriverWait(self.driver, 10)
+		wait_.until(EC.visibility_of_element_located(logout_element),
+		            message=f"invalid username or password")
+
+		# webelement  = self.driver.find_element(logout_element)
+		# assert webelement, "invalid credentials"
+

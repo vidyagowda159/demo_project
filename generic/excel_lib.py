@@ -2,7 +2,7 @@ import xlrd
 
 
 def read_locators(sheetname):
-	file_path = r"C:\Users\Vidyashree M C\demo_project\POM\locators.xlsx"
+	file_path = r"C:\Users\Vidyashree M C\demo_project\test_files\locators.xlsx"
 	xlrd.xlsx.ensure_elementtree_imported(False, None)
 	xlrd.xlsx.Element_has_iter = True
 	wb = xlrd.open_workbook(file_path)
