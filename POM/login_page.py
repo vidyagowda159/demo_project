@@ -44,7 +44,7 @@ from generic.wrapper import SeleniumWrapper
 loc = read_locators("login_objects")
 
 
-@attach_locators(loc)
+@attach_locators(loc)       # @wrapper
 class LoginPage(SeleniumWrapper):
 
 	def login(self, username, pwd):
@@ -64,11 +64,10 @@ class LoginPage(SeleniumWrapper):
 		self.click_element(self.login_btn)
 
 	def is_user_logged_in(self):
-		logout_element = "link text", "Log out"
-		wait_ = WebDriverWait(self.driver, 10)
-		wait_.until(EC.visibility_of_element_located(logout_element),
+		wait_ = WebDriverWait(self.driver, 5)
+		webelement = wait_.until(EC.visibility_of_element_located(self.logout_link),
 		            message=f"invalid username or password")
 
-		# webelement  = self.driver.find_element(logout_element)
-		# assert webelement, "invalid credentials"
+		webelement.click()
+
 
