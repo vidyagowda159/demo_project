@@ -22,7 +22,6 @@ data = [("maire@gmail.com", "marie123"),
         ]
 
 
-
 @pytest.mark.parametrize("username, pwd", data)
 def test_if_user_is_logged_in(driver_initializer, username, pwd):
 	driver = driver_initializer
