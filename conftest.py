@@ -18,13 +18,13 @@ def pytest_addoption(parser):
 	                 )
 
 
-class TestConfigurations():
+class TestConfigurations:
 	url = "https://demowebshop.tricentis.com/"
 	username = "maire@gmail.com"
 	password = "marie123"
 
 
-class StageConfigurations():
+class StageConfigurations:
 	url = "https://demowebshop.tricentis.com/"
 	username = "maire1@gmail.com"
 	password = "marie123"
@@ -35,7 +35,7 @@ def env_config(request):
 	env_ = request.config.option.env
 
 	if env_.lower() == "test":
-		return TestConfigurations()
+		return TestConfigurations()     # creating instance
 	elif env_.lower() == "stage":
 		return StageConfigurations()
 
